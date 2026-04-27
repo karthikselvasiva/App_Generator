@@ -10,7 +10,7 @@ import './Landing.css';
 const features = [
   { icon: <Globe size={24} />, title: 'Any Website', desc: 'Convert any responsive website into a native Android app with full WebView support.' },
   { icon: <Palette size={24} />, title: 'Custom Splash Screen', desc: 'Design beautiful welcome screens with custom colors, logos, and animations.' },
-  { icon: <Download size={24} />, title: 'APK Download', desc: 'Generate and download your APK file instantly, ready for Play Store upload.' },
+  { icon: <Download size={24} />, title: 'Android Studio Project', desc: 'Download a complete Android Studio project. Build a signed APK or AAB for Play Store.' },
   { icon: <ImagePlus size={24} />, title: 'Custom App Icon', desc: 'Upload your own app icon and see it applied across all Android screen densities.' },
   { icon: <Shield size={24} />, title: 'Play Store Ready', desc: 'Generated apps meet all Google Play Store requirements and guidelines.' },
   { icon: <Bell size={24} />, title: 'Push Notifications', desc: 'Pre-configured push notification support via Firebase Cloud Messaging.' },

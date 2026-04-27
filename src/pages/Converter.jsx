@@ -3,7 +3,7 @@ import {
   Globe, ArrowRight, ArrowLeft, Smartphone, Palette, Type,
   RotateCcw, Zap, Download, Check, Loader, Eye, Image,
   ToggleLeft, ToggleRight, Clock, ChevronDown, Upload,
-  ImagePlus, X, FileArchive, FileDown
+  ImagePlus, X, FileArchive
 } from 'lucide-react';
 import StepIndicator from '../components/StepIndicator';
 import PhoneMockup from '../components/PhoneMockup';
@@ -111,9 +111,8 @@ export default function Converter() {
     if (projectBlob) downloadProject(projectBlob, config.appName, 'zip');
   };
 
-  const handleDownloadApk = () => {
-    if (projectBlob) downloadProject(projectBlob, config.appName, 'apk');
-  };
+  // APK cannot be generated in-browser — users must build via Android Studio
+  // Only the project ZIP download is available
 
   const next = () => {
     if (step === 4 && !buildComplete) { startBuild(); return; }
@@ -415,7 +414,7 @@ export default function Converter() {
                         </div>
                       </div>
                       <button className="btn btn-primary btn-large build-btn" onClick={startBuild}>
-                        <Zap size={18} /> Generate APK & Project
+                        <Zap size={18} /> Generate Android Project
                       </button>
                     </div>
                   )}
@@ -434,41 +433,32 @@ export default function Converter() {
                   {buildComplete && (
                     <div className="build-done">
                       <div className="done-icon"><Check size={40} /></div>
-                      <h3>Build Successful!</h3>
-                      <p>Your Android app is ready! Download as APK or as an Android Studio project.</p>
+                      <h3>Project Generated!</h3>
+                      <p>Your Android Studio project is ready. Download it and build a signed APK/AAB using Android Studio.</p>
 
                       <div className="download-options">
-                        <button className="download-card" onClick={handleDownloadApk}>
-                          <div className="download-card-icon apk-icon">
-                            <FileDown size={28} />
-                          </div>
-                          <div className="download-card-info">
-                            <span className="download-card-title">Download APK</span>
-                            <span className="download-card-desc">Ready to install on Android device</span>
-                          </div>
-                          <Download size={18} className="download-arrow" />
-                        </button>
-
                         <button className="download-card" onClick={handleDownloadZip}>
                           <div className="download-card-icon zip-icon">
                             <FileArchive size={28} />
                           </div>
                           <div className="download-card-info">
-                            <span className="download-card-title">Download Project (.zip)</span>
-                            <span className="download-card-desc">Full Android Studio source code</span>
+                            <span className="download-card-title">Download Android Studio Project</span>
+                            <span className="download-card-desc">Complete source code (.zip) — open in Android Studio to build</span>
                           </div>
                           <Download size={18} className="download-arrow" />
                         </button>
                       </div>
 
                       <div className="build-instructions glass-card">
-                        <h4>📱 Play Store Upload Guide</h4>
+                        <h4>📱 How to Build APK & Upload to Play Store</h4>
                         <ol>
-                          <li><span>1</span> Download the <strong>Project ZIP</strong></li>
-                          <li><span>2</span> Open in <strong>Android Studio</strong></li>
-                          <li><span>3</span> Build → Generate Signed Bundle <strong>(AAB)</strong></li>
-                          <li><span>4</span> Upload AAB to <strong>Google Play Console</strong></li>
-                          <li><span>5</span> Fill store listing & submit for review</li>
+                          <li><span>1</span> <strong>Download</strong> the project ZIP above</li>
+                          <li><span>2</span> <strong>Extract</strong> and open in <strong>Android Studio</strong></li>
+                          <li><span>3</span> Wait for <strong>Gradle sync</strong> to finish</li>
+                          <li><span>4</span> <strong>Build → Generate Signed Bundle / APK</strong></li>
+                          <li><span>5</span> Choose <strong>APK</strong> for testing or <strong>AAB</strong> for Play Store</li>
+                          <li><span>6</span> Create or select a <strong>Keystore</strong> to sign the app</li>
+                          <li><span>7</span> Upload the signed <strong>AAB</strong> to <strong>Google Play Console</strong></li>
                         </ol>
                       </div>
 
